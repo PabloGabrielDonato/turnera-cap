@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
+use App\Models\Location;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -25,7 +27,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
         ]);
-
         $admin->assignRole('admin');
+
+        $this->call([
+        //   UserSeeder::class,
+        //   LocationSeeder::class,
+        //   TimeSlotSeeder::class,
+        //   BookingSeeder::class,
+        ]);
+
+      //  Locations::factory()->create(3);
+      //  Booking::factory()->create();
+
     }
 }

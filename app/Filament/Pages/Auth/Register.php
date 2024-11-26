@@ -2,14 +2,11 @@
 
 namespace App\Filament\Pages\Auth;
 
-use App\Models\User;
 use App\Models\UserData;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
-use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
-use Filament\Pages\Page;
 use Filament\Pages\Auth\Register as RegisterPage;
 
 use Illuminate\Database\Eloquent\Model;
