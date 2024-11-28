@@ -14,29 +14,17 @@ use Illuminate\Http\Request;
 
 class LocationApiController extends Controller
 {
-    private CreateLocation $createLocation;
     private ListLocations $listLocations;
     private ShowLocation $showLocation;
-    private UpdateLocation $updateLocation;
-    private DeleteLocation $deleteLocation;
-    private AddTimeSlot $addTimeSlot;
     private GetAvailability $getAvailability;
     public function __construct(
         ListLocations $listLocations,
-        CreateLocation $createLocation,
         ShowLocation $showLocation,
-        UpdateLocation $updateLocation,
-        DeleteLocation $deleteLocation,
-        AddTimeSlot $addTimeSlot,
         GetAvailability $getAvailability,
     )
     {
         $this->listLocations = $listLocations;
-        $this->createLocation = $createLocation;
         $this->showLocation = $showLocation;
-        $this->updateLocation = $updateLocation;
-        $this->deleteLocation = $deleteLocation;
-        $this->addTimeSlot = $addTimeSlot;
         $this->getAvailability = $getAvailability;
     }
     /**
@@ -51,23 +39,6 @@ class LocationApiController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'capacity' => 'required|integer|min:1',
-        ]);
-
-        $location = $this->createLocation->execute($request->all());
-        return response()->json(
-            $location,
-            201
-        );
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id)
@@ -78,62 +49,6 @@ class LocationApiController extends Controller
             200
         );
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'capacity' => 'required|integer|min:1',
-        ]);
-
-        $location = $this->updateLocation->execute($id, $request->all());
-        return response()->json(
-            $location,
-            200
-        );
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $location = $this->deleteLocation->execute($id);
-        return response()->json(
-            $location,
-            204
-        );
-    }
-
-
-    /**
-     * Agrega Horario disponible a una locacion
-     */
-    public function addTimeSlot(Request $request, int $id)
-    {
-        $request->validate([
-            'day_of_week' => 'required|integer|between:0,6',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
-            'cost_per_hour' => 'required|integer|min:0',
-        ]);
-
-        try{
-            $timeSlot = $this->addTimeSlot->execute($id, $request->all());
-            return response()->json(
-                $timeSlot,
-                201
-            );
-        }catch (\Exception $exception){
-           return response()->json([
-                'message' => 'El nuevo horario se superpone con un horario existente.',
-            ], 422);
-        }
-    }
-
 
     /**
      * Verificar Disponibilidad de una locacion
