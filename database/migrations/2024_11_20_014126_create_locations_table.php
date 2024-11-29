@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image')->nullable();
             $table->integer('capacity')->default(0);
             $table->timestamps();
         });

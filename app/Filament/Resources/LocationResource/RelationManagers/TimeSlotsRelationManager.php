@@ -85,6 +85,8 @@ class TimeSlotsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('cost_per_hour')
                     ->label('Costo por hora')
                     ->prefix('ARS $'),
+                    Tables\Columns\TextColumn::make('day_of_week')
+                    ->label('Dia de la Semana'),
                 Tables\Columns\TextColumn::make('start_time')
                     ->label('Hora de inicio'),
                 Tables\Columns\TextColumn::make('end_time')

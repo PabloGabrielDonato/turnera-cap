@@ -12,6 +12,7 @@ class Location extends Model
     protected $fillable = [
         'name',
         'capacity',
+        'image'
     ];
 
     public function timeSlots(): HasMany

@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
 
 class LocationResource extends Resource
 {
@@ -26,6 +27,9 @@ class LocationResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->label('Nombre'),
+
+                FileUpload::make('image')
+                    ->label('Imagen'),
                 Forms\Components\TextInput::make('capacity')
                     ->label('Capacidad')
                     ->numeric()
@@ -40,6 +44,7 @@ class LocationResource extends Resource
             ->columns([
                 Columns\TextColumn::make('name')
                 ->label('Nombre'),
+
                 Columns\TextColumn::make('capacity')
                 ->label('Capacidad')
 
